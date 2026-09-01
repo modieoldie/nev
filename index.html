@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GB Renovations NYC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300..600&display=swap">
+<style>
+:root{
+  --paper:#FBFAF7; --panel:#F1F0EA; --panel-2:#E5E4DC;
+  --ink:#16181B; --ink-2:#4A4E54; --ink-3:#6E737A;
+  --rule:#C9C8C0; --rule-2:#DEDDD6;
+  --tape:#2C6FA8; --tape-soft:#DFEAF3; --brass:#9A7B3C;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --gut:44px; --marg:150px; --maxw:1140px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121316; --panel:#191B1F; --panel-2:#212429;
+    --ink:#E8E7E1; --ink-2:#A9ADB3; --ink-3:#7B8087;
+    --rule:#33373D; --rule-2:#25282D;
+    --tape:#6FAEE0; --tape-soft:#17293A; --brass:#C4A567;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121316; --panel:#191B1F; --panel-2:#212429;
+  --ink:#E8E7E1; --ink-2:#A9ADB3; --ink-3:#7B8087;
+  --rule:#33373D; --rule-2:#25282D;
+  --tape:#6FAEE0; --tape-soft:#17293A; --brass:#C4A567;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--sans); text-wrap:balance; margin:0}
+p{margin:0}
+a{color:var(--tape)}
+:focus-visible{outline:2px solid var(--tape); outline-offset:3px; border-radius:2px}
+
+/* ---------- title block bar ---------- */
+.titlebar{
+  position:sticky; top:0; z-index:40; background:var(--paper);
+  border-bottom:1px solid var(--rule);
+}
+.titlebar .inner{
+  max-width:var(--maxw); margin:0 auto; padding:0 24px;
+  display:flex; align-items:stretch; gap:24px; min-height:56px;
+}
+.tb-mark{display:flex; flex-direction:column; justify-content:center; padding:8px 0; flex:0 0 auto}
+.tb-mark b{
+  font-family:var(--sans); font-weight:700; font-stretch:112%;
+  text-transform:uppercase; letter-spacing:.06em; font-size:14px; line-height:1.15;
+}
+.tb-mark span{font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.12em; text-transform:uppercase}
+.tb-nav{margin-left:auto; display:flex; align-items:center; gap:2px; overflow-x:auto; scrollbar-width:none}
+.tb-nav::-webkit-scrollbar{display:none}
+.tb-nav a{
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-2); text-decoration:none; padding:8px 10px; white-space:nowrap;
+  border-bottom:2px solid transparent;
+}
+.tb-nav a:hover{color:var(--ink); border-bottom-color:var(--tape)}
+
+/* ---------- sheet grid ---------- */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+.sheet{
+  display:grid; grid-template-columns:var(--marg) minmax(0,1fr); gap:var(--gut);
+  padding:56px 0 12px;
+}
+.sheet > .marg{padding-top:4px}
+.sheetno{
+  font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--tape);
+  text-transform:uppercase; display:block;
+}
+.margtitle{
+  font-family:var(--sans); font-weight:600; font-stretch:100%; font-size:12px;
+  text-transform:uppercase; letter-spacing:.1em; color:var(--ink-2); margin-top:6px; display:block;
+}
+.margnote{
+  font-family:var(--mono); font-size:11px; line-height:1.65; color:var(--ink-3);
+  margin-top:14px; border-top:1px solid var(--rule-2); padding-top:10px;
+}
+h2.sh{
+  font-size:clamp(1.55rem,3.1vw,2.1rem); font-weight:700; font-stretch:104%;
+  letter-spacing:-.012em; line-height:1.12; margin-bottom:14px;
+}
+.lede{font-size:1.09rem; color:var(--ink-2); max-width:62ch}
+.body{max-width:66ch}
+.body p + p{margin-top:14px}
+
+/* dimension-line divider */
+.dim{
+  grid-column:1 / -1; position:relative; height:1px; background:var(--rule);
+  margin:34px 0 0; border:0;
+}
+.dim::before,.dim::after{
+  content:""; position:absolute; top:-5px; width:1px; height:11px; background:var(--rule);
+}
+.dim::before{left:0}
+.dim::after{right:0}
+
+/* ---------- cover ---------- */
+.cover{padding-top:64px}
+.kicker{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.kicker b{color:var(--tape); font-weight:500}
+h1{
+  font-family:var(--serif); font-weight:300; font-size:clamp(2.35rem,5.4vw,4.05rem);
+  line-height:1.06; letter-spacing:-.018em; margin:18px 0 0; max-width:17ch;
+}
+h1 em{font-style:normal; color:var(--tape)}
+.cover .lede{margin-top:22px; font-size:1.14rem}
+
+/* title block fact grid */
+.tblock{
+  margin:38px 0 0; border:1px solid var(--rule); background:var(--panel);
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.tblock div{padding:16px 18px 18px; border-right:1px solid var(--rule)}
+.tblock div:last-child{border-right:0}
+.tblock dt{
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); margin-bottom:8px;
+}
+.tblock dd{
+  margin:0; font-family:var(--sans); font-weight:600; font-stretch:100%;
+  font-size:.95rem; line-height:1.35; letter-spacing:-.005em;
+}
+.tblock .num{font-family:var(--mono); font-weight:500; font-variant-numeric:tabular-nums; font-size:1.05rem}
+
+/* ---------- floor plan ---------- */
+.plan-wrap{
+  display:grid; grid-template-columns:minmax(0,1.3fr) minmax(258px,.7fr);
+  gap:30px; margin-top:26px; align-items:start;
+}
+.plan-card{border:1px solid var(--rule); background:var(--panel); padding:16px}
+svg.plan{display:block; width:100%; height:auto}
+.room{cursor:pointer}
+.room rect{fill:var(--paper); stroke:var(--ink); stroke-width:2; transition:fill .12s ease}
+.room:hover rect{fill:var(--panel-2)}
+.room text{font-family:var(--mono); font-size:12px; letter-spacing:.09em; fill:var(--ink); pointer-events:none; text-anchor:middle}
+.room text.sf{font-size:10px; fill:var(--ink-3); letter-spacing:.04em}
+.room[aria-pressed="true"] rect{fill:var(--tape-soft); stroke:var(--tape); stroke-width:3}
+.room[aria-pressed="true"] text{fill:var(--tape)}
+.room[aria-pressed="true"] text.sf{fill:var(--tape)}
+.envelope{fill:none; stroke:var(--ink); stroke-width:6}
+.plan-meta{font-family:var(--mono); font-size:10px; letter-spacing:.08em; fill:var(--ink-3)}
+.plan-note{
+  font-family:var(--mono); font-size:10.5px; color:var(--ink-3); letter-spacing:.06em;
+  margin-top:12px; text-transform:uppercase;
+}
+
+.detail{border:1px solid var(--rule); border-top:3px solid var(--tape); background:var(--panel); padding:20px 22px 22px}
+.detail h3{font-size:1.12rem; font-weight:700; font-stretch:104%; letter-spacing:-.01em; text-transform:uppercase}
+.detail .sub{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-top:4px}
+.detail ul{margin:16px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px}
+.detail li{position:relative; padding-left:18px; font-size:.95rem; line-height:1.5; color:var(--ink-2)}
+.detail li::before{content:""; position:absolute; left:0; top:.62em; width:8px; height:1px; background:var(--brass)}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:18px; padding-top:16px; border-top:1px solid var(--rule-2)}
+.chips .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); width:100%}
+#d-chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; padding:3px 7px;
+  border:1px solid var(--rule); color:var(--ink-2); background:var(--paper);
+}
+
+/* ---------- schedule ---------- */
+.sched{margin-top:26px; border:1px solid var(--rule); background:var(--panel); padding:20px 0 16px; overflow-x:auto}
+.sched-in{min-width:660px; padding:0 18px}
+.axis{position:relative; height:20px; margin-left:200px; border-bottom:1px solid var(--rule)}
+.axis span{
+  position:absolute; transform:translateX(-50%); font-family:var(--mono); font-size:10px;
+  color:var(--ink-3); font-variant-numeric:tabular-nums; bottom:4px;
+}
+.row{display:grid; grid-template-columns:200px minmax(0,1fr); align-items:center}
+.row .lab{
+  font-family:var(--sans); font-size:12px; font-weight:500; font-stretch:100%; color:var(--ink-2);
+  padding-right:14px;
+}
+.track{position:relative; height:29px; border-bottom:1px solid var(--rule-2)}
+.track::before{content:""; position:absolute; left:31.25%; top:0; bottom:0; width:1px; background:var(--brass); opacity:.55}
+.bar{position:absolute; top:7px; height:15px; background:var(--tape)}
+.bar.pre{background:transparent; border:1px dashed var(--brass)}
+.bar span{
+  font-family:var(--mono); font-size:10px; color:var(--ink-3); position:absolute; left:calc(100% + 7px);
+  top:1px; white-space:nowrap; font-variant-numeric:tabular-nums;
+}
+.sched-key{
+  display:flex; gap:22px; flex-wrap:wrap; margin:14px 18px 0; padding-top:12px; border-top:1px solid var(--rule);
+  font-family:var(--mono); font-size:10.5px; color:var(--ink-3); letter-spacing:.05em; text-transform:uppercase;
+}
+.sched-key i{display:inline-block; width:16px; height:9px; background:var(--tape); margin-right:7px; vertical-align:1px}
+.sched-key i.pre{background:transparent; border:1px dashed var(--brass)}
+.sched-key i.zero{width:1px; height:12px; background:var(--brass); margin:0 12px 0 6px; vertical-align:-1px}
+
+/* ---------- tables ---------- */
+.tbl-scroll{overflow-x:auto; margin-top:24px}
+.tbl{width:100%; border-collapse:collapse; font-size:.94rem; min-width:560px}
+.tbl caption{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ink-3); text-align:left; padding-bottom:10px;
+}
+.tbl th,.tbl td{text-align:left; padding:11px 14px 11px 0; border-bottom:1px solid var(--rule-2); vertical-align:top}
+.tbl thead th{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:400; border-bottom:1px solid var(--rule); padding-bottom:9px;
+}
+.tbl tbody th{font-family:var(--sans); font-weight:600; font-stretch:100%; font-size:.9rem; width:26%; color:var(--ink)}
+.tbl td{color:var(--ink-2)}
+.tbl td.gb{color:var(--ink); padding-left:14px; border-left:1px solid var(--rule-2)}
+.tbl thead th.gb{padding-left:14px; border-left:1px solid var(--rule-2); color:var(--tape)}
+
+/* trade list */
+.trades{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(186px,1fr));
+  margin-top:26px; border-top:1px solid var(--rule);
+}
+.trades div{
+  border-bottom:1px solid var(--rule-2); padding:10px 14px 10px 0;
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.03em; color:var(--ink-2);
+  display:flex; gap:10px;
+}
+.trades div b{color:var(--tape); font-weight:400}
+
+/* approvals */
+.steps{list-style:none; margin:24px 0 0; padding:0; border-top:1px solid var(--rule)}
+.steps li{display:grid; grid-template-columns:74px minmax(0,1fr); gap:18px; padding:18px 0; border-bottom:1px solid var(--rule-2)}
+.steps .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--brass); padding-top:3px}
+.steps h4{font-size:.99rem; font-weight:600; font-stretch:100%; letter-spacing:-.004em}
+.steps p{margin-top:5px; font-size:.95rem; color:var(--ink-2); max-width:62ch}
+
+/* two-up */
+.twoup{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; margin-top:28px}
+.twoup h4{font-size:.99rem; font-weight:600; font-stretch:100%; margin-bottom:8px}
+.twoup p{font-size:.95rem; color:var(--ink-2)}
+
+/* ---------- contact ---------- */
+.contact{border:1px solid var(--rule); background:var(--panel); padding:28px 30px; margin-top:26px}
+.contact h3{font-size:1.3rem; font-weight:700; font-stretch:104%; letter-spacing:-.012em}
+.contact p{margin-top:10px; color:var(--ink-2); max-width:58ch}
+.cgrid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; margin:24px 0 0; padding-top:22px; border-top:1px solid var(--rule)}
+.cgrid dt{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px}
+.cgrid dd{margin:0; font-family:var(--mono); font-size:13px; color:var(--brass)}
+.ph-note{font-family:var(--mono); font-size:10.5px; color:var(--brass); margin-top:18px; letter-spacing:.04em}
+.intake{margin-top:26px}
+.intake .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.intake ol{margin:10px 0 0; padding-left:20px; color:var(--ink-2); font-size:.95rem; display:flex; flex-direction:column; gap:5px}
+
+footer{
+  border-top:1px solid var(--rule); margin-top:56px; padding:22px 0 40px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3);
+  display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;
+}
+
+@media (max-width:900px){
+  :root{--marg:120px; --gut:28px}
+  .plan-wrap{grid-template-columns:minmax(0,1fr)}
+  .tblock{grid-template-columns:repeat(2,1fr)}
+  .tblock div:nth-child(2){border-right:0}
+  .tblock div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .cgrid{grid-template-columns:minmax(0,1fr); gap:16px}
+}
+@media (max-width:680px){
+  body{font-size:16px}
+  .sheet{grid-template-columns:minmax(0,1fr); gap:16px; padding-top:40px}
+  .margnote{display:none}
+  .marg{display:flex; align-items:baseline; gap:12px}
+  .margtitle{margin-top:0}
+  .twoup{grid-template-columns:minmax(0,1fr); gap:24px}
+  .steps li{grid-template-columns:minmax(0,1fr); gap:6px}
+  .contact{padding:22px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="inner">
+    <div class="tb-mark">
+      <b>GB Renovations</b>
+      <span>Interior GC &middot; Manhattan</span>
+    </div>
+    <nav class="tb-nav" aria-label="Sheet index">
+      <a href="#a101">A-101 Scope</a>
+      <a href="#a201">A-201 Sequence</a>
+      <a href="#a301">A-301 Coordination</a>
+      <a href="#a401">A-401 Approvals</a>
+      <a href="#a501">A-501 Design Team</a>
+      <a href="#a601">A-601 Contact</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ================= A-000 COVER ================= -->
+  <section class="sheet cover" aria-labelledby="cover-h">
+    <div class="marg">
+      <span class="sheetno">A-000</span>
+      <span class="margtitle">Cover</span>
+      <div class="margnote">Full-service interior<br>general contracting.<br>Gut renovation through<br>final punch list.</div>
+    </div>
+    <div>
+      <p class="kicker"><b>GB Renovations NYC</b> &nbsp;/&nbsp; Interior General Contracting</p>
+      <h1 id="cover-h">You hand us the drawings. We hand back <em>the apartment.</em></h1>
+      <p class="lede">A full apartment renovation is fifteen trades, a building&rsquo;s alteration agreement, a permit set, and a delivery calendar that has to line up to the week. GB Renovations carries all of it under one contract &mdash; demolition, framing, mechanicals, millwork, stone, floors, paint and closeout &mdash; so you are managing one relationship instead of fifteen.</p>
+
+      <dl class="tblock">
+        <div>
+          <dt>Scope</dt>
+          <dd>Gut renovation &rarr; final finishes</dd>
+        </div>
+        <div>
+          <dt>Typical on-site duration</dt>
+          <dd class="num">16&ndash;26 wks</dd>
+        </div>
+        <div>
+          <dt>Trades under one contract</dt>
+          <dd class="num">14+</dd>
+        </div>
+        <div>
+          <dt>Where we work</dt>
+          <dd>Manhattan co-ops, condos &amp; townhouses</dd>
+        </div>
+      </dl>
+    </div>
+    <hr class="dim" aria-hidden="true">
+  </section>
+
+  <!-- ================= A-101 SCOPE PLAN ================= -->
+  <section class="sheet" id="a101" aria-labelledby="a101-h">
+    <div class="marg">
+      <span class="sheetno">A-101</span>
+      <span class="margtitle">Scope Plan</span>
+      <div class="margnote">Select a room to read<br>what gets built in it,<br>and which trades are<br>on site for it.</div>
+    </div>
+    <div>
+      <h2 class="sh" id="a101-h">What a gut renovation covers, room by room</h2>
+      <p class="lede">Below is a schematic prewar two-bedroom &mdash; the layout we work in most often. In a full gut, every room comes back to bare studs and subfloor before anything new goes in. Select a room.</p>
+
+      <div class="plan-wrap">
+        <div class="plan-card">
+          <svg class="plan" viewBox="0 0 760 530" role="group" aria-label="Schematic apartment floor plan. Select a room to see its scope of work.">
+            <g class="room" id="r-kitchen" role="button" tabindex="0" aria-pressed="true" aria-label="Kitchen">
+              <rect x="20" y="20" width="210" height="220"></rect>
+              <text x="125" y="124">KITCHEN</text>
+              <text class="sf" x="125" y="144">160 SF</text>
+            </g>
+            <g class="room" id="r-dining" role="button" tabindex="0" aria-pressed="false" aria-label="Dining room">
+              <rect x="230" y="20" width="180" height="220"></rect>
+              <text x="320" y="124">DINING</text>
+              <text class="sf" x="320" y="144">130 SF</text>
+            </g>
+            <g class="room" id="r-living" role="button" tabindex="0" aria-pressed="false" aria-label="Living room">
+              <rect x="410" y="20" width="330" height="220"></rect>
+              <text x="575" y="124">LIVING ROOM</text>
+              <text class="sf" x="575" y="144">300 SF</text>
+            </g>
+            <g class="room" id="r-hall" role="button" tabindex="0" aria-pressed="false" aria-label="Entry and hall">
+              <rect x="20" y="240" width="720" height="70"></rect>
+              <text x="380" y="271">ENTRY &amp; HALL</text>
+              <text class="sf" x="380" y="291">110 SF</text>
+            </g>
+            <g class="room" id="r-bath2" role="button" tabindex="0" aria-pressed="false" aria-label="Second bathroom">
+              <rect x="20" y="310" width="130" height="170"></rect>
+              <text x="85" y="389">BATH 2</text>
+              <text class="sf" x="85" y="409">55 SF</text>
+            </g>
+            <g class="room" id="r-bed2" role="button" tabindex="0" aria-pressed="false" aria-label="Second bedroom">
+              <rect x="150" y="310" width="220" height="170"></rect>
+              <text x="260" y="389">BEDROOM 2</text>
+              <text class="sf" x="260" y="409">165 SF</text>
+            </g>
+            <g class="room" id="r-pbath" role="button" tabindex="0" aria-pressed="false" aria-label="Primary bathroom">
+              <rect x="370" y="310" width="130" height="170"></rect>
+              <text x="435" y="380">PRIMARY</text>
+              <text x="435" y="398">BATH</text>
+              <text class="sf" x="435" y="418">75 SF</text>
+            </g>
+            <g class="room" id="r-pbed" role="button" tabindex="0" aria-pressed="false" aria-label="Primary bedroom">
+              <rect x="500" y="310" width="240" height="170"></rect>
+              <text x="620" y="380">PRIMARY</text>
+              <text x="620" y="398">BEDROOM</text>
+              <text class="sf" x="620" y="418">210 SF</text>
+            </g>
+            <rect class="envelope" x="20" y="20" width="720" height="460"></rect>
+            <g aria-hidden="true">
+              <line x1="712" y1="522" x2="712" y2="503" stroke="currentColor" stroke-width="1" style="stroke:var(--ink-3)"></line>
+              <path d="M 712 498 L 707 508 L 717 508 Z" style="fill:var(--ink-3)"></path>
+              <text class="plan-meta" x="732" y="519">N</text>
+            </g>
+            <text class="plan-meta" x="20" y="512">SCHEMATIC &mdash; NOT TO SCALE</text>
+            <text class="plan-meta" x="20" y="527">APPROX. 1,200 SF &middot; 2 BR / 2 BA &middot; PREWAR</text>
+          </svg>
+        </div>
+
+        <aside class="detail" aria-live="polite">
+          <h3 id="d-name">Kitchen</h3>
+          <p class="sub" id="d-sub">Longest lead time &middot; drives the schedule</p>
+          <ul id="d-list"></ul>
+          <div class="chips">
+            <span class="lbl">Trades on site</span>
+            <span id="d-chips"></span>
+          </div>
+        </aside>
+      </div>
+      <p class="plan-note">Scope shown is typical. Actual scope follows the architect&rsquo;s drawing set and the approved alteration agreement.</p>
+    </div>
+    <hr class="dim" aria-hidden="true">
+  </section>
+
+  <!-- ================= A-201 SEQUENCE ================= -->
+  <section class="sheet" id="a201" aria-labelledby="a201-h">
+    <div class="marg">
+      <span class="sheetno">A-201</span>
+      <span class="margtitle">Sequence</span>
+      <div class="margnote">Week 0 is mobilization<br>&mdash; the first day tools<br>can legally go into<br>the apartment.</div>
+    </div>
+    <div>
+      <h2 class="sh" id="a201-h">The construction schedule, drawn to the week</h2>
+      <p class="lede">Phases overlap, and managing that overlap is most of what a general contractor is for: stone gets templated while walls are still being taped, so counters are cut and cured by the time cabinets are set. Below is a representative schedule for a full two-bedroom gut.</p>
+
+      <div class="sched">
+        <div class="sched-in">
+          <div class="axis" aria-hidden="true">
+            <span style="left:0%">&minus;10</span>
+            <span style="left:15.63%">&minus;5</span>
+            <span style="left:31.25%">0</span>
+            <span style="left:46.88%">5</span>
+            <span style="left:62.5%">10</span>
+            <span style="left:78.13%">15</span>
+            <span style="left:93.75%">20</span>
+          </div>
+
+          <div class="row"><div class="lab">Preconstruction &amp; approvals</div>
+            <div class="track"><div class="bar pre" style="left:0%;width:31.25%"><span>4&ndash;10 wks</span></div></div></div>
+          <div class="row"><div class="lab">Protection &amp; demolition</div>
+            <div class="track"><div class="bar" style="left:31.25%;width:6.25%"><span>2 wks</span></div></div></div>
+          <div class="row"><div class="lab">Framing, blocking, substrates</div>
+            <div class="track"><div class="bar" style="left:35.94%;width:6.25%"><span>2 wks</span></div></div></div>
+          <div class="row"><div class="lab">Rough electric, plumbing, HVAC</div>
+            <div class="track"><div class="bar" style="left:40.63%;width:12.5%"><span>4 wks</span></div></div></div>
+          <div class="row"><div class="lab">Inspections &amp; close-in</div>
+            <div class="track"><div class="bar" style="left:51.56%;width:4.69%"><span>1.5 wks</span></div></div></div>
+          <div class="row"><div class="lab">Sheetrock, tape, plaster</div>
+            <div class="track"><div class="bar" style="left:54.69%;width:9.38%"><span>3 wks</span></div></div></div>
+          <div class="row"><div class="lab">Tile &amp; stone</div>
+            <div class="track"><div class="bar" style="left:62.5%;width:9.38%"><span>3 wks</span></div></div></div>
+          <div class="row"><div class="lab">Millwork &amp; cabinetry install</div>
+            <div class="track"><div class="bar" style="left:68.75%;width:9.38%"><span>3 wks</span></div></div></div>
+          <div class="row"><div class="lab">Flooring</div>
+            <div class="track"><div class="bar" style="left:73.44%;width:6.25%"><span>2 wks</span></div></div></div>
+          <div class="row"><div class="lab">Paint &amp; finish carpentry</div>
+            <div class="track"><div class="bar" style="left:78.13%;width:9.38%"><span>3 wks</span></div></div></div>
+          <div class="row"><div class="lab">Trim-out, fixtures, appliances</div>
+            <div class="track"><div class="bar" style="left:84.38%;width:7.81%"><span>2.5 wks</span></div></div></div>
+          <div class="row"><div class="lab">Punch list &amp; closeout</div>
+            <div class="track"><div class="bar" style="left:90.63%;width:6.25%"><span>2 wks</span></div></div></div>
+        </div>
+        <div class="sched-key">
+          <span><i class="pre"></i>Before mobilization</span>
+          <span><i></i>On site</span>
+          <span><i class="zero"></i>Week 0 &mdash; approvals in hand, work begins</span>
+          <span>Scale: weeks</span>
+        </div>
+      </div>
+
+      <div class="body" style="margin-top:26px">
+        <p>Two things move the end date more than anything else. The first is long-lead material: cabinetry and custom millwork are commonly quoted at 10&ndash;16 weeks from approved shop drawings, and slabs, appliances and specialty plumbing fittings each have their own clock. We order against the schedule rather than the calendar, so nothing sits in a warehouse while the crew waits &mdash; and nothing is missing on the day it is needed.</p>
+        <p>The second is the building. Most Manhattan co-ops and condos limit construction to weekday business hours, restrict noisy work to a narrower window inside that, and shut the site down for holidays and building events. A schedule that ignores house rules is fiction. Ours is built from them.</p>
+      </div>
+    </div>
+    <hr class="dim" aria-hidden="true">
+  </section>
+
+  <!-- ================= A-301 COORDINATION ================= -->
+  <section class="sheet" id="a301" aria-labelledby="a301-h">
+    <div class="marg">
+      <span class="sheetno">A-301</span>
+      <span class="margtitle">Coordination</span>
+      <div class="margnote">One contract.<br>One schedule.<br>One number to call<br>when a slab arrives<br>cracked.</div>
+    </div>
+    <div>
+      <h2 class="sh" id="a301-h">Everything we carry so you don&rsquo;t hire it separately</h2>
+      <p class="lede">These are the trades and vendors on a typical full gut. Hired individually, each is a separate contract, a separate insurance certificate, a separate deposit, and a separate person with an opinion about who is holding up the job.</p>
+
+      <div class="trades">
+        <div><b>01</b> Demolition &amp; carting</div>
+        <div><b>02</b> Site protection</div>
+        <div><b>03</b> Carpentry &amp; framing</div>
+        <div><b>04</b> Licensed electrical</div>
+        <div><b>05</b> Licensed plumbing</div>
+        <div><b>06</b> HVAC &amp; ductwork</div>
+        <div><b>07</b> Sheetrock &amp; taping</div>
+        <div><b>08</b> Plaster &amp; skim coat</div>
+        <div><b>09</b> Tile setting</div>
+        <div><b>10</b> Waterproofing</div>
+        <div><b>11</b> Stone fabrication</div>
+        <div><b>12</b> Cabinetry &amp; millwork</div>
+        <div><b>13</b> Wood flooring</div>
+        <div><b>14</b> Painting &amp; finishing</div>
+        <div><b>15</b> Glass, mirror &amp; shower doors</div>
+        <div><b>16</b> Hardware &amp; fixtures</div>
+        <div><b>17</b> Appliance installation</div>
+        <div><b>18</b> Lighting control &amp; low-voltage</div>
+      </div>
+
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <caption>Two ways to run the same renovation</caption>
+          <thead>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">Owner-coordinated</th>
+              <th scope="col" class="gb">With GB Renovations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Contracts</th>
+              <td>A dozen or more, each with its own terms, deposit schedule and lien exposure.</td>
+              <td class="gb">One contract with a defined scope, a schedule of values and a payment schedule.</td>
+            </tr>
+            <tr>
+              <th scope="row">Scheduling</th>
+              <td>You sequence each trade yourself, and absorb the delay when one arrives before the wall is ready for them.</td>
+              <td class="gb">We hold the master schedule and stage trades against it, including the overlaps.</td>
+            </tr>
+            <tr>
+              <th scope="row">Building compliance</th>
+              <td>You chase insurance certificates, elevator slots and work-hour approvals for every vendor.</td>
+              <td class="gb">We keep every subcontractor&rsquo;s paperwork current with the managing agent, for the length of the job.</td>
+            </tr>
+            <tr>
+              <th scope="row">When something is wrong</th>
+              <td>The tile setter blames the plumber, and both bill you for the return trip.</td>
+              <td class="gb">It is ours to resolve. Coordination failures between our trades are not change orders.</td>
+            </tr>
+            <tr>
+              <th scope="row">Changes</th>
+              <td>Renegotiated one trade at a time, usually mid-job and at a premium.</td>
+              <td class="gb">Priced as a written change order, with its schedule impact stated before you approve it.</td>
+            </tr>
+            <tr>
+              <th scope="row">Closeout</th>
+              <td>You assemble the punch list and re-book each trade to come back for it.</td>
+              <td class="gb">We walk the job with you and your designer, then work one list down to zero.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr class="dim" aria-hidden="true">
+  </section>
+
+  <!-- ================= A-401 APPROVALS ================= -->
+  <section class="sheet" id="a401" aria-labelledby="a401-h">
+    <div class="marg">
+      <span class="sheetno">A-401</span>
+      <span class="margtitle">Approvals</span>
+      <div class="margnote">The part of a Manhattan<br>renovation that has<br>nothing to do with<br>construction &mdash; and<br>stops it cold.</div>
+    </div>
+    <div>
+      <h2 class="sh" id="a401-h">Renovating inside a Manhattan building</h2>
+      <p class="lede">In a house, you pull a permit and start. In a Manhattan apartment, the building is a second client, with its own review, its own rules and its own veto. Requirements vary building to building &mdash; here is the shape of it, and what we handle.</p>
+
+      <ol class="steps">
+        <li>
+          <div class="tag">Step 01</div>
+          <div>
+            <h4>Alteration agreement</h4>
+            <p>The board or managing agent issues the agreement that governs the work: permitted hours, protection requirements, insurance limits, deposits, and often restrictions on moving wet areas over a neighbor&rsquo;s dry rooms. We read it before we price the job, because it sets both the cost and the schedule.</p>
+          </div>
+        </li>
+        <li>
+          <div class="tag">Step 02</div>
+          <div>
+            <h4>Board and engineer review</h4>
+            <p>Drawings go to the board, and usually to the building&rsquo;s engineer or architect, for comment &mdash; on structure, on riser tie-ins, on sound attenuation. Comments come back and the set is revised until it is approved. Budget real calendar time for this round; it is the most commonly underestimated part of the job.</p>
+          </div>
+        </li>
+        <li>
+          <div class="tag">Step 03</div>
+          <div>
+            <h4>DOB filing and permits</h4>
+            <p>The architect or expediter files the alteration application with the Department of Buildings, and the licensed electrical and plumbing work is filed separately by those trades. In pre-1974 buildings an asbestos investigation, and the ACP-5 form that results from it, is typically required before a permit will issue.</p>
+          </div>
+        </li>
+        <li>
+          <div class="tag">Step 04</div>
+          <div>
+            <h4>Insurance and vendor paperwork</h4>
+            <p>Certificates of insurance naming the building, the managing agent, the board and the owner &mdash; at the limits the alteration agreement requires &mdash; for us and for every subcontractor who walks through the door. This is the single most common reason a crew gets turned away in the lobby on day one.</p>
+          </div>
+        </li>
+        <li>
+          <div class="tag">Step 05</div>
+          <div>
+            <h4>Protection, access and house rules</h4>
+            <p>Before demolition: masonite and board over lobby and corridor floors, protection in the service elevator cab and at door bucks, dust containment at the apartment entry, and a booked elevator window for every delivery and every carting run. Work hours, freight access and quiet periods are the building&rsquo;s call, and we plan the crew around them.</p>
+          </div>
+        </li>
+        <li>
+          <div class="tag">Step 06</div>
+          <div>
+            <h4>Inspections and sign-off</h4>
+            <p>Rough inspections have to pass before walls close. At the end, permits are signed off and the job is formally closed out with the building &mdash; the step owners most often discover was skipped years later, at resale.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <hr class="dim" aria-hidden="true">
+  </section>
+
+  <!-- ================= A-501 DESIGN TEAM ================= -->
+  <section class="sheet" id="a501" aria-labelledby="a501-h">
+    <div class="marg">
+      <span class="sheetno">A-501</span>
+      <span class="margtitle">Design Team</span>
+      <div class="margnote">We build the drawings.<br>We do not redesign<br>them in the field.</div>
+    </div>
+    <div>
+      <h2 class="sh" id="a501-h">Working with your architect and designer</h2>
+      <p class="lede">Much of our work arrives as a finished set from an architect and an interior designer. Our job is to make the built apartment match those drawings &mdash; and to raise conflicts early, in a meeting, rather than late, inside a wall.</p>
+
+      <div class="twoup">
+        <div>
+          <h4>Preconstruction review</h4>
+          <p>We read the set before pricing it and come back with constructability questions: ceiling heights against new ductwork, slab conditions under a relocated shower, whether a specified fixture can actually be served by the existing riser. All far cheaper to answer on paper.</p>
+        </div>
+        <div>
+          <h4>Line-item budgeting</h4>
+          <p>Pricing comes back by trade and by room, tied to the drawings and the finish schedule, so you can see where the money is and make choices before demolition instead of after.</p>
+        </div>
+        <div>
+          <h4>Shop drawings and submittals</h4>
+          <p>Millwork, stone and metal shop drawings are produced from field dimensions and routed to the designer for approval before anything is cut. Samples and submittals are logged and tracked through to a decision.</p>
+        </div>
+        <div>
+          <h4>Site meetings and a written record</h4>
+          <p>A standing walkthrough with the design team, with RFIs and change orders in writing. Field decisions get documented the day they are made, so the record matches what is actually behind the walls.</p>
+        </div>
+        <div>
+          <h4>Owner-supplied items</h4>
+          <p>Designer-procured fixtures, appliances, tile and hardware are received, inspected and stored against their install dates &mdash; with damage and shortages flagged while there is still time to replace them.</p>
+        </div>
+        <div>
+          <h4>No design in the field</h4>
+          <p>When a condition in the building makes a detail impossible, we bring options back to the architect and designer. We do not quietly substitute, and we do not build something other than what was drawn.</p>
+        </div>
+      </div>
+    </div>
+    <hr class="dim" aria-hidden="true">
+  </section>
+
+  <!-- ================= A-601 CONTACT ================= -->
+  <section class="sheet" id="a601" aria-labelledby="a601-h">
+    <div class="marg">
+      <span class="sheetno">A-601</span>
+      <span class="margtitle">Contact</span>
+      <div class="margnote">Send the drawings.<br>We will tell you what<br>it costs and how<br>long it takes.</div>
+    </div>
+    <div>
+      <h2 class="sh" id="a601-h">Start a project</h2>
+      <p class="lede">Whether you are holding a complete permit set or a contract on an apartment you have not closed on yet, the first conversation is the same: what is there now, what you want, and what the building will allow.</p>
+
+      <div class="contact">
+        <h3>GB Renovations NYC</h3>
+        <p>Interior general contracting for Manhattan apartments. Gut renovations, kitchens and baths, cabinetry and millwork, and full finish work &mdash; demolition through punch list.</p>
+        <dl class="cgrid">
+          <div><dt>Email</dt><dd>[ your email address ]</dd></div>
+          <div><dt>Phone</dt><dd>[ your phone number ]</dd></div>
+          <div><dt>Office</dt><dd>[ your address ]</dd></div>
+        </dl>
+        <p class="ph-note">&#9633; Placeholder &mdash; replace the bracketed fields with real contact details before this goes live.</p>
+      </div>
+
+      <div class="intake">
+        <span class="lbl">What to send with a first inquiry</span>
+        <ol>
+          <li>Building address and apartment line, and whether it is a co-op or a condo.</li>
+          <li>Approximate square footage and the apartment&rsquo;s current condition.</li>
+          <li>Architectural or designer drawings, if you have them &mdash; any stage is fine.</li>
+          <li>The building&rsquo;s alteration agreement, if it has been issued.</li>
+          <li>Your target start date, and any hard deadline on the other end.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>GB Renovations NYC &middot; Interior General Contracting</span>
+    <span>Manhattan, New York</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var SCOPE = {
+    "r-kitchen": {
+      name: "Kitchen",
+      sub: "Longest lead time · drives the schedule",
+      items: [
+        "Full demolition to studs and subfloor; existing soffits and bulkheads opened and evaluated for what is hiding in them.",
+        "New wet wall, waste and vent tie-ins to the building riser, and gas line work coordinated with the licensed plumber.",
+        "Dedicated circuits, undercabinet and in-cabinet lighting, and appliance rough-ins set from the approved shop drawings.",
+        "Hood exhaust or recirculation resolved against the building's rules before the ceiling closes.",
+        "Cabinetry set and scribed, stone templated off the installed boxes, backsplash tile, then appliance install and final adjustment."
+      ],
+      trades: ["Demolition","Plumbing","Electrical","Framing","Millwork","Stone","Tile","Appliances"]
+    },
+    "r-dining": {
+      name: "Dining Room",
+      sub: "Ceiling, lighting and finish work",
+      items: [
+        "Ceiling opened where new circuits require it, then plastered flat and level.",
+        "Blocking installed for the fixture over the table, positioned to the reflected ceiling plan.",
+        "New base, casing and any panel or picture-frame molding built to the millwork details.",
+        "Dimming and lighting control wired back to a single labeled panel.",
+        "Flooring woven into the adjacent rooms, with no threshold where the drawings do not show one."
+      ],
+      trades: ["Electrical","Plaster","Millwork","Flooring","Paint"]
+    },
+    "r-living": {
+      name: "Living Room",
+      sub: "Largest surface area · sets the finish standard",
+      items: [
+        "Walls and ceilings stripped, straightened and skim-coated — prewar plaster is rarely flat, and every raking light in the room will show it.",
+        "Windows, radiator enclosures and existing moldings restored or replaced to match the details in the set.",
+        "Built-ins and paneling fabricated from field dimensions, after the walls are true.",
+        "Lighting, low-voltage and AV wiring run before close-in, with device locations confirmed on site.",
+        "Floors sanded and finished, or new material laid over a leveled, sound-attenuating underlayment where the building requires one."
+      ],
+      trades: ["Framing","Plaster","Millwork","Electrical","Flooring","Paint"]
+    },
+    "r-hall": {
+      name: "Entry & Hall",
+      sub: "Circulation · the building's edge of the job",
+      items: [
+        "Entry door, frame and hardware addressed — often with building approval required for anything visible from the corridor.",
+        "Closets rebuilt with new interiors, lighting and doors as part of the millwork package.",
+        "Panel location, thermostat and control keypads coordinated so nothing lands in the middle of a sightline.",
+        "Protection and dust containment live here for the whole job: masonite in the corridor, a sealed entry, a booked elevator for every delivery.",
+        "Finished last, once the crews have stopped tracking through it."
+      ],
+      trades: ["Protection","Carpentry","Millwork","Electrical","Paint"]
+    },
+    "r-bath2": {
+      name: "Bath 2",
+      sub: "Small room, most trades per square foot",
+      items: [
+        "Demolition to the slab, with existing substrate and waterproofing conditions documented before anything is rebuilt.",
+        "New supply and waste tied into the riser; valves and drain set to the fixture cut sheets.",
+        "Waterproofing installed and flood-tested before a single tile is set.",
+        "Tile laid out to the designer's drawing — dry-set and approved before it is mortared.",
+        "Vanity, mirror, glass, fixtures and accessories installed, then the room is cleaned and closed."
+      ],
+      trades: ["Demolition","Plumbing","Electrical","Waterproofing","Tile","Glass","Millwork"]
+    },
+    "r-bed2": {
+      name: "Bedroom 2",
+      sub: "Quiet, level and correctly wired",
+      items: [
+        "Walls straightened and ceilings skim-coated; sound attenuation added in partitions where the drawings or the building call for it.",
+        "Closet interiors built out to the millwork drawings.",
+        "Outlets, switching and low-voltage located against the furniture plan, not against the old wiring.",
+        "Door, casing and base replaced to match the apartment-wide millwork profile.",
+        "Floors finished to the same specification as the rest of the apartment."
+      ],
+      trades: ["Framing","Plaster","Electrical","Millwork","Flooring","Paint"]
+    },
+    "r-pbath": {
+      name: "Primary Bath",
+      sub: "Highest risk · waterproofing and stone",
+      items: [
+        "Full demolition, with any relocation of wet areas verified against the alteration agreement before it is committed to.",
+        "Shower pan, curb and niches framed and pitched, then fully waterproofed and flood-tested.",
+        "Slab selection, templating and fabrication for vanity tops, benches and thresholds — with veining laid out and approved.",
+        "Radiant heat, exhaust, lighting and medicine-cabinet power coordinated ahead of close-in.",
+        "Fixtures, custom glass measured after tile is set, and hardware installed last."
+      ],
+      trades: ["Demolition","Plumbing","Electrical","Waterproofing","Tile","Stone","Glass","Millwork"]
+    },
+    "r-pbed": {
+      name: "Primary Bedroom",
+      sub: "Delivered alongside the primary bath",
+      items: [
+        "Partitions reframed where the plan changes; new openings headed and blocked.",
+        "Walk-in or reach-in closet millwork built to field dimensions and set after the floors.",
+        "Reading lights, switching at both sides of the bed, and window-treatment power run before close-in.",
+        "Ceilings skim-coated flat and walls prepared for the specified paint or wallcovering.",
+        "Sequenced with the primary bath so both rooms are punched and handed over together."
+      ],
+      trades: ["Framing","Plaster","Electrical","Millwork","Flooring","Paint"]
+    }
+  };
+
+  var nameEl = document.getElementById('d-name');
+  var subEl  = document.getElementById('d-sub');
+  var listEl = document.getElementById('d-list');
+  var chipEl = document.getElementById('d-chips');
+  var rooms  = Array.prototype.slice.call(document.querySelectorAll('.room'));
+
+  function render(id){
+    var d = SCOPE[id];
+    if(!d){ return; }
+    rooms.forEach(function(r){ r.setAttribute('aria-pressed', r.id === id ? 'true' : 'false'); });
+    nameEl.textContent = d.name;
+    subEl.textContent = d.sub;
+    listEl.innerHTML = '';
+    d.items.forEach(function(t){
+      var li = document.createElement('li');
+      li.textContent = t;
+      listEl.appendChild(li);
+    });
+    chipEl.innerHTML = '';
+    d.trades.forEach(function(t){
+      var s = document.createElement('span');
+      s.className = 'chip';
+      s.textContent = t;
+      chipEl.appendChild(s);
+    });
+  }
+
+  rooms.forEach(function(r){
+    r.addEventListener('click', function(){ render(r.id); });
+    r.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){
+        e.preventDefault();
+        render(r.id);
+      }
+    });
+  });
+
+  render('r-kitchen');
+})();
+</script>
+</body>
+</html>
