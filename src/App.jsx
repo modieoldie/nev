@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import heroImage from "./assets/ducky_money.png";
 import {
   BrowserRouter,
   Link,
@@ -12,8 +13,13 @@ import {
   ArrowUpRight,
   Check,
   List,
+  Minus,
+  Plus,
   X,
 } from "@phosphor-icons/react";
+
+const LICENSE_LINE =
+  "Licensed & Insured NYC General Contractor · Licensed Plumbing & Electrical Trades";
 
 const serviceData = {
   kitchens: {
@@ -68,55 +74,215 @@ const serviceData = {
   },
 };
 
-const projects = [
+const services = [
+  {
+    title: "Complete Renovations",
+    copy: "Full and gut renovations carried end to end, with one team accountable from demolition through final finishes.",
+    items: [
+      "Full apartment renovations",
+      "Gut renovations",
+      "Layout changes",
+      "Demolition",
+      "Framing and drywall",
+      "Ceilings and flooring",
+      "Painting and finishes",
+    ],
+  },
+  {
+    title: "Kitchens",
+    copy: "Every trade converging in one room, planned so the cabinetry, infrastructure, and finishes land together.",
+    items: [
+      "Cabinetry and islands",
+      "Countertops and backsplashes",
+      "Appliance integration",
+      "Plumbing and lighting",
+      "Flooring",
+      "Custom storage",
+    ],
+    to: "/kitchens",
+    linkLabel: "See kitchen renovations",
+  },
+  {
+    title: "Bathrooms",
+    copy: "Waterproofing and mechanical work done properly before a single tile goes on the wall.",
+    items: [
+      "Tile and stone",
+      "Waterproofing",
+      "Showers and tubs",
+      "Vanities and fixtures",
+      "Plumbing",
+      "Ventilation and lighting",
+    ],
+    to: "/bathrooms",
+    linkLabel: "See bathroom renovations",
+  },
+  {
+    title: "Custom Millwork & Interior Details",
+    copy: "Shop-built and site-fit joinery that makes an apartment feel considered rather than assembled.",
+    items: [
+      "Built-ins and closets",
+      "Custom cabinetry",
+      "Wall panels and shelving",
+      "Doors and trim",
+      "Molding",
+      "Architectural details",
+    ],
+  },
+  {
+    title: "Mechanical & Technical Work",
+    copy: "The systems behind the walls, coordinated early so nothing has to be opened up twice.",
+    items: [
+      "Electrical",
+      "Plumbing",
+      "HVAC",
+      "Lighting systems",
+      "Smart-home integration",
+      "Soundproofing and insulation",
+      "Ventilation",
+    ],
+  },
+  {
+    title: "Project Management & Coordination",
+    copy: "The scheduling, paperwork, and building relationships that keep a Manhattan job moving.",
+    items: [
+      "Scheduling and budgeting",
+      "Trade coordination",
+      "Architect and designer coordination",
+      "Building management and permits",
+      "Inspections and purchasing",
+      "Punch lists and final handoff",
+    ],
+  },
+];
+
+const processSteps = [
   [
-    "Upper West Side residence",
-    "Full apartment",
-    "Completed living room and adjoining dining area",
-    "1800 × 2200 px",
+    "Consultation",
+    "We walk the apartment with you, listen to how you want to live in it, and talk openly about scope, budget range, and realistic timing before anything is drawn.",
   ],
   [
-    "Downtown kitchen",
-    "Kitchen",
-    "Wide kitchen with custom cabinetry and stone island",
-    "1600 × 1100 px",
+    "Planning and design coordination",
+    "We work alongside your architect or designer, or help you find one, and turn the drawings into a buildable scope with materials and long-lead items identified early.",
   ],
   [
-    "Pre-war primary bath",
-    "Bathroom",
-    "Full-room bathroom showing tile and vanity details",
-    "1600 × 1100 px",
+    "Proposal and contract",
+    "You receive a line-item proposal that shows the full scope, where the money goes, the construction schedule, and clear payment milestones.",
   ],
   [
-    "Chelsea apartment",
-    "Full apartment",
-    "Architectural wide shot of finished apartment",
-    "1600 × 1100 px",
+    "Building approvals and permits",
+    "We prepare the alteration agreement, board package, insurance certificates, and DOB filings, and manage the building requirements on your behalf.",
   ],
   [
-    "Tribeca millwork",
-    "Custom millwork",
-    "Close detail of cabinetry, hardware, and finish alignment",
-    "1600 × 1100 px",
+    "Construction",
+    "Protection and demolition, rough trades, inspections, then finishes. One project lead runs the site daily and keeps you current with photos and an updated schedule.",
   ],
   [
-    "Upper East Side kitchen",
-    "Kitchen",
-    "Finished galley or open kitchen photograph",
-    "1600 × 1100 px",
+    "Punch list and closeout",
+    "We walk the finished apartment together, complete the punch list, clean, and hand over warranties, manuals, and closeout documents.",
   ],
 ];
 
-function ImagePlaceholder({ note, size, className = "" }) {
+const portfolio = [
+  {
+    id: "tribeca",
+    name: "Tribeca",
+    type: "Full apartment renovation",
+    meta: "Loft conversion · 3 bed · 2.5 bath",
+    featured: "Featured: living area with restored steel windows",
+    description:
+      "A full gut renovation of a converted warehouse loft. We opened the plan, rebuilt the mechanical systems end to end, and detailed the apartment around the original cast columns and steel windows so the new work reads as if it had always been there.",
+    scope: [
+      "Full demolition and layout reconfiguration",
+      "New electrical, plumbing, and HVAC distribution",
+      "Custom kitchen millwork and stone fabrication",
+      "Two full bathrooms, waterproofed and tiled",
+      "Wide-plank flooring and plaster wall finishes",
+      "Co-op alteration agreement and DOB filings",
+    ],
+    gallery: [
+      "Living area with restored steel windows",
+      "Open kitchen with island and integrated appliances",
+      "Custom kitchen millwork detail",
+      "Countertop and backsplash junction",
+      "Primary bathroom with full-height stone",
+      "Shower niche and fixture detail",
+      "Secondary bathroom vanity",
+      "Entry with built-in storage wall",
+      "Bedroom with plaster finish and wide-plank floor",
+      "Hallway millwork and door trim detail",
+    ],
+  },
+  {
+    id: "chelsea",
+    name: "Chelsea",
+    type: "Full apartment renovation",
+    meta: "Condominium · 2 bed · 2 bath",
+    featured: "Featured: living and dining area after completion",
+    description:
+      "A condominium renovation carried out against a fixed move-in date. The kitchen was opened to the living room, every bathroom was rebuilt, and storage was added throughout without giving up floor area.",
+    scope: [
+      "Kitchen wall removal and structural coordination",
+      "New kitchen with waterfall island and integrated appliances",
+      "Primary bathroom and powder room rebuilt",
+      "Custom closets and living room built-ins",
+      "New lighting layout, dimming, and controls",
+      "Building alteration approval and inspections",
+    ],
+    gallery: [
+      "Living and dining area after completion",
+      "Open kitchen with waterfall island",
+      "Cabinetry and appliance integration",
+      "Backsplash and undercabinet lighting",
+      "Primary bathroom with double vanity",
+      "Walk-in shower with glass enclosure",
+      "Powder room stone detail",
+      "Custom closet build-out",
+      "Bedroom with new lighting layout",
+      "Living room built-in shelving",
+    ],
+  },
+  {
+    id: "soho",
+    name: "SoHo",
+    type: "Millwork-led renovation",
+    meta: "Cast-iron loft · Kitchen, baths, and millwork",
+    featured: "Featured: great room with original cast-iron columns",
+    description:
+      "A millwork-led renovation of a cast-iron loft. Full-height paneling, concealed doors, and a library wall were built to align with the existing column grid, with the kitchen and bathrooms rebuilt to match.",
+    scope: [
+      "Full-height wall paneling and concealed doors",
+      "Library shelving and integrated storage",
+      "Kitchen with paneled appliance integration",
+      "Primary bathroom with book-matched stone",
+      "Soundproofed bedroom partition and insulation",
+      "Trade coordination with the design team throughout",
+    ],
+    gallery: [
+      "Great room with original cast-iron columns",
+      "Full-height millwork wall",
+      "Library shelving detail",
+      "Kitchen with integrated paneling",
+      "Island and stone detail",
+      "Primary bath with book-matched stone",
+      "Vanity and fixture detail",
+      "Concealed door and trim alignment",
+      "Bedroom with soundproofed partition",
+      "Entry and coat closet build-out",
+    ],
+  },
+];
+
+function ImagePlaceholder({ note, size, className = "", src }) {
   return (
     <div
-      className={`image-placeholder ${className}`}
+      className={`image-placeholder ${src ? "has-image" : ""} ${className}`}
       role="img"
-      aria-label={`Image placeholder: ${note}`}
+      aria-label={src ? note : `Image placeholder: ${note}`}
     >
-      <span>Image placeholder</span>
-      <strong>{note}</strong>
-      <small>Recommended: {size}</small>
+      {src ? <img src={src} alt="" /> : null}
+      {src ? null : <span>Image placeholder</span>}
+      {src ? null : <strong>{note}</strong>}
+      {src || !size ? null : <small>Recommended: {size}</small>}
     </div>
   );
 }
@@ -140,9 +306,9 @@ function Header() {
   }, [open]);
   const nav = [
     ["/", "Home"],
-    ["/kitchens", "Kitchens"],
-    ["/bathrooms", "Bathrooms"],
     ["/portfolio", "Portfolio"],
+    ["/services", "Services"],
+    ["/process", "Process"],
     ["/about", "About"],
   ];
   return (
@@ -182,35 +348,15 @@ function Header() {
 function Footer() {
   return (
     <footer>
-      <div className="container footer-main">
-        <div>
-          <Link className="brand footer-brand" to="/">
-            <span className="brand-mark">GB</span>
-            <span className="brand-copy">
-              <b>GB Renovations</b>
-              <small>Manhattan, New York</small>
-            </span>
-          </Link>
-          <p>
-            Full-service interior general contracting for Manhattan apartments.
-          </p>
-        </div>
-        <div>
-          <strong>Explore</strong>
-          <Link to="/kitchens">Kitchens</Link>
-          <Link to="/bathrooms">Bathrooms</Link>
-          <Link to="/portfolio">Portfolio</Link>
-        </div>
-        <div>
-          <strong>Company</strong>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/contact">Plan a renovation</Link>
-        </div>
-      </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} GB Renovations NYC.</span>
-        <span>Verified business contact details to be added.</span>
+        <nav className="footer-links" aria-label="Footer">
+          <Link to="/portfolio">Portfolio</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/process">Process</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+        </nav>
       </div>
     </footer>
   );
@@ -259,6 +405,7 @@ function Home() {
           className="hero-backdrop"
           note="Signature completed Manhattan apartment interior"
           size="2400 × 1600 px"
+          src={heroImage}
         />
         <div className="hero-shade" />
         <div className="container hero-content reveal">
@@ -279,12 +426,14 @@ function Home() {
         </div>
       </section>
       <div className="trust">
-        <div className="container trust-grid">
-          <b>Every detail lives under one roof.</b>
-          <span>Co-op and condo coordination</span>
-          <span>Architect and designer collaboration</span>
-          <span>Trade and material management</span>
-          <span>Final walkthrough and closeout</span>
+        <div className="container trust-inner">
+          <p className="trust-title">Every detail lives under one roof.</p>
+          <ul className="trust-list">
+            <li>Co-op and condo coordination</li>
+            <li>Architect and designer collaboration</li>
+            <li>Trade and material management</li>
+            <li>Final walkthrough and closeout</li>
+          </ul>
         </div>
       </div>
       <section>
@@ -333,13 +482,88 @@ function Home() {
               scheduling, materials, subcontractors, building coordination, and
               quality control.
             </p>
-            <Button to="/about">See our approach</Button>
+            <Button to="/process">See our process</Button>
           </div>
           <ImagePlaceholder
             className="reveal"
             note="Project manager reviewing plans on site"
             size="1500 × 1200 px"
           />
+        </div>
+      </section>
+      <CTA />
+    </>
+  );
+}
+
+function Services() {
+  return (
+    <>
+      <section className="simple-hero">
+        <div className="container reveal">
+          <p className="eyebrow">Services</p>
+          <h1>Everything the build requires.</h1>
+          <p className="lead">
+            We carry the whole renovation, from demolition and infrastructure
+            through millwork, finishes, and final handoff, with one team
+            accountable for the result.
+          </p>
+        </div>
+      </section>
+      <section className="list-page">
+        <div className="container service-grid">
+          {services.map(({ title, copy, items, to, linkLabel }) => (
+            <article className="service-card reveal" key={title}>
+              <h2>{title}</h2>
+              <p>{copy}</p>
+              <ul className="service-items">
+                {items.map((item) => (
+                  <li key={item}>
+                    <Check size={13} weight="bold" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {to ? (
+                <Link className="service-card-link" to={to}>
+                  {linkLabel} <ArrowRight size={15} weight="bold" />
+                </Link>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </section>
+      <CTA />
+    </>
+  );
+}
+
+function Process() {
+  return (
+    <>
+      <section className="simple-hero">
+        <div className="container reveal">
+          <p className="eyebrow">Process</p>
+          <h1>Six steps, start to finish.</h1>
+          <p className="lead">
+            Every project follows the same path, so you always know what happens
+            next, who is doing it, and what it costs.
+          </p>
+        </div>
+      </section>
+      <section className="list-page">
+        <div className="container numbered-list">
+          {processSteps.map(([title, copy], i) => (
+            <article className="numbered-row reveal" key={title}>
+              <span className="numbered-index">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="numbered-body">
+                <h2>{title}</h2>
+                <p>{copy}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
       <CTA />
@@ -406,7 +630,68 @@ function ServicePage({ type }) {
   );
 }
 
+function ProjectPanel({ project, onClose }) {
+  return (
+    <div className="project-panel" id={`project-${project.id}`}>
+      <div className="project-panel-head">
+        <div>
+          <p className="eyebrow">{project.type}</p>
+          <h2>{project.name}</h2>
+          <p className="project-panel-meta">{project.meta}</p>
+        </div>
+        <button className="project-close" onClick={onClose}>
+          <X size={15} weight="bold" /> Close
+        </button>
+      </div>
+      <div className="project-panel-body">
+        <p className="lead">{project.description}</p>
+        <div className="project-scope">
+          <strong>Project scope</strong>
+          <ul>
+            {project.scope.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="project-gallery">
+        {project.gallery.map((note, i) => (
+          <ImagePlaceholder
+            key={note}
+            className={i === 0 ? "gallery-lead" : ""}
+            note={note}
+            size={i === 0 ? "2000 × 1400 px" : undefined}
+          />
+        ))}
+      </div>
+      <button className="project-close bottom" onClick={onClose}>
+        <X size={15} weight="bold" /> Close and return to all projects
+      </button>
+    </div>
+  );
+}
+
 function Portfolio() {
+  const [openId, setOpenId] = useState(null);
+  const panelRef = useRef(null);
+  const gridRef = useRef(null);
+  const mounted = useRef(false);
+  const open = portfolio.find((p) => p.id === openId) || null;
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    const target = openId ? panelRef.current : gridRef.current;
+    if (!target) return;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY - 116,
+      behavior: reduced ? "instant" : "smooth",
+    });
+  }, [openId]);
+
   return (
     <>
       <section className="simple-hero">
@@ -414,22 +699,54 @@ function Portfolio() {
           <p className="eyebrow">Portfolio</p>
           <h1>Work that should speak for itself.</h1>
           <p className="lead">
-            This page is structured for real GB Renovations photography. Replace
-            each labeled placeholder with a completed project image.
+            Select a project to open its full gallery, description, and scope
+            without leaving this page.
           </p>
         </div>
       </section>
       <section className="portfolio-page">
-        <div className="container portfolio-grid">
-          {projects.map(([title, type, note, size]) => (
-            <article className="portfolio-item reveal" key={title}>
-              <ImagePlaceholder note={note} size={size} />
-              <div>
-                <span>{type}</span>
-                <h3>{title}</h3>
-              </div>
-            </article>
-          ))}
+        <div className="container">
+          <div className="portfolio-grid" ref={gridRef}>
+            {portfolio.map((project) => {
+              const isOpen = project.id === openId;
+              return (
+                <article
+                  className={`portfolio-item${isOpen ? " is-open" : ""}`}
+                  key={project.id}
+                >
+                  <button
+                    className="portfolio-trigger"
+                    onClick={() => setOpenId(isOpen ? null : project.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={`project-${project.id}`}
+                  >
+                    <ImagePlaceholder note={project.featured} />
+                    <span className="portfolio-meta">
+                      <span className="portfolio-type">{project.type}</span>
+                      <span className="portfolio-name">{project.name}</span>
+                      <span className="portfolio-action">
+                        {isOpen ? (
+                          <>
+                            <Minus size={13} weight="bold" /> Close gallery
+                          </>
+                        ) : (
+                          <>
+                            <Plus size={13} weight="bold" /> View{" "}
+                            {project.gallery.length} photos
+                          </>
+                        )}
+                      </span>
+                    </span>
+                  </button>
+                </article>
+              );
+            })}
+          </div>
+          {open ? (
+            <div ref={panelRef}>
+              <ProjectPanel project={open} onClose={() => setOpenId(null)} />
+            </div>
+          ) : null}
         </div>
       </section>
       <CTA />
@@ -468,6 +785,11 @@ function About() {
               controlled, legible, and professionally managed from demolition to
               handover.
             </p>
+            <p className="credential">
+              <Check size={15} weight="bold" />
+              <span>{LICENSE_LINE}</span>
+            </p>
+            <Button>Start a conversation</Button>
           </div>
           <ImagePlaceholder
             className="reveal"
@@ -620,9 +942,11 @@ function AppRoutes() {
     <PageShell>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/process" element={<Process />} />
         <Route path="/kitchens" element={<ServicePage type="kitchens" />} />
         <Route path="/bathrooms" element={<ServicePage type="bathrooms" />} />
-        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />

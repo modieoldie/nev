@@ -29,11 +29,16 @@ The production output is written to `dist/`.
 ## Routes
 
 - `/`: home
-- `/kitchens`: kitchen renovation service
-- `/bathrooms`: bathroom renovation service
-- `/portfolio`: project portfolio
+- `/portfolio`: project portfolio, with galleries that expand in place
+- `/services`: the six service categories
+- `/process`: the six-step project process
+- `/kitchens`: kitchen renovation service detail
+- `/bathrooms`: bathroom renovation service detail
 - `/about`: company approach
 - `/contact`: project inquiry form
+
+Main navigation is Home, Portfolio, Services, Process, About. The kitchen and
+bathroom detail pages are reached from the home page and from Services.
 
 The app uses browser history routing. Production hosting must rewrite unknown
 paths to `index.html` so direct visits and page refreshes work correctly.
