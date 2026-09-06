@@ -1,5 +1,23 @@
-import { useEffect, useRef, useState } from "react";
-import heroImage from "./assets/ducky_money.png";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import uesLivingDining from "./assets/photos/ues-living-dining.jpg";
+import uesDiningSkyline from "./assets/photos/ues-dining-skyline.jpg";
+import uesOpenPlan from "./assets/photos/ues-open-plan.jpg";
+import uesKitchenStoneIsland from "./assets/photos/ues-kitchen-stone-island.jpg";
+import uesKitchenGloss from "./assets/photos/ues-kitchen-gloss.jpg";
+import uesMarbleGreatRoom from "./assets/photos/ues-marble-great-room.jpg";
+import uesPowderOnyx from "./assets/photos/ues-powder-onyx.jpg";
+import uwsLivingBrass from "./assets/photos/uws-living-brass.jpg";
+import uwsLivingKitchen from "./assets/photos/uws-living-kitchen.jpg";
+import uwsBathVanity from "./assets/photos/uws-bath-vanity.jpg";
+import sohoLoftColumns from "./assets/photos/soho-loft-columns.jpg";
+import sohoDemoFraming from "./assets/photos/soho-demo-framing.jpg";
+import sohoKitchenComplete from "./assets/photos/soho-kitchen-complete.jpg";
+import kitchenOpenPlanFireplace from "./assets/photos/kitchen-open-plan-fireplace.jpg";
+import kitchenWalnutWaterfall from "./assets/photos/kitchen-walnut-waterfall.jpg";
+import kitchenGalleyBrass from "./assets/photos/kitchen-galley-brass.jpg";
+import kitchenLoftBar from "./assets/photos/kitchen-loft-bar.jpg";
+import bathPowderWallpaper from "./assets/photos/bath-powder-wallpaper.jpg";
+import bathSubwayTub from "./assets/photos/bath-subway-tub.jpg";
 import {
   BrowserRouter,
   Link,
@@ -27,7 +45,10 @@ const serviceData = {
     title: "A kitchen built around Manhattan life.",
     intro:
       "From compact galley kitchens to open entertaining spaces, we coordinate cabinetry, stone, lighting, appliances, plumbing, and every finish as one construction scope.",
-    heroNote: "Completed Manhattan kitchen with custom millwork",
+    heroNote: "Completed Manhattan kitchen open to the living room",
+    heroSrc: kitchenOpenPlanFireplace,
+    featureNote: "Compact galley kitchen with brass hardware and stone counters",
+    featureSrc: kitchenGalleyBrass,
     details: [
       [
         "Layout and infrastructure",
@@ -52,7 +73,10 @@ const serviceData = {
     title: "Technical work with a refined finish.",
     intro:
       "A Manhattan bathroom concentrates multiple trades into a small footprint. We manage waterproofing, plumbing, tile, stone, glass, millwork, lighting, and inspections in the right sequence.",
-    heroNote: "Completed primary bathroom with stone and custom vanity",
+    heroNote: "Powder room with backlit onyx and a floating vanity",
+    heroSrc: uesPowderOnyx,
+    featureNote: "Completed bathroom with tile, stone, and glass enclosure",
+    featureSrc: bathSubwayTub,
     details: [
       [
         "Waterproofing and tile",
@@ -184,90 +208,70 @@ const processSteps = [
 
 const portfolio = [
   {
-    id: "tribeca",
-    name: "Tribeca",
+    id: "upper-east-side",
+    name: "Upper East Side",
     type: "Full apartment renovation",
-    meta: "Loft conversion · 3 bed · 2.5 bath",
-    featured: "Featured: living area with restored steel windows",
+    meta: "High-rise co-op · Living, dining, kitchen, and baths",
+    featured: "Featured: living and dining area after completion",
+    featuredSrc: uesLivingDining,
     description:
-      "A full gut renovation of a converted warehouse loft. We opened the plan, rebuilt the mechanical systems end to end, and detailed the apartment around the original cast columns and steel windows so the new work reads as if it had always been there.",
+      "A full renovation of a high-floor co-op apartment. The plan was opened between the living and dining areas, the kitchen was rebuilt around a stone island, and the bathrooms were taken back to the studs and finished with stone, integrated lighting, and custom vanities.",
     scope: [
-      "Full demolition and layout reconfiguration",
-      "New electrical, plumbing, and HVAC distribution",
-      "Custom kitchen millwork and stone fabrication",
-      "Two full bathrooms, waterproofed and tiled",
-      "Wide-plank flooring and plaster wall finishes",
-      "Co-op alteration agreement and DOB filings",
+      "Layout reconfiguration across the living and dining areas",
+      "New kitchen with stone island and integrated appliances",
+      "Bathrooms rebuilt with waterproofing, stone, and custom vanities",
+      "New lighting layout, dimming, and controls throughout",
+      "Wide-plank flooring and full repaint",
+      "Co-op alteration agreement and building coordination",
     ],
     gallery: [
-      "Living area with restored steel windows",
-      "Open kitchen with island and integrated appliances",
-      "Custom kitchen millwork detail",
-      "Countertop and backsplash junction",
-      "Primary bathroom with full-height stone",
-      "Shower niche and fixture detail",
-      "Secondary bathroom vanity",
-      "Entry with built-in storage wall",
-      "Bedroom with plaster finish and wide-plank floor",
-      "Hallway millwork and door trim detail",
+      ["Dining area with skyline windows", uesDiningSkyline],
+      ["Open plan looking through to the kitchen", uesOpenPlan],
+      ["Kitchen with high-gloss cabinetry and dining counter", uesKitchenGloss],
     ],
   },
   {
-    id: "chelsea",
-    name: "Chelsea",
+    id: "upper-west-side",
+    name: "Upper West Side",
     type: "Full apartment renovation",
-    meta: "Condominium · 2 bed · 2 bath",
-    featured: "Featured: living and dining area after completion",
+    meta: "Condominium · Living, kitchen, and bath",
+    featured: "Featured: living area with custom metal wall panels",
+    featuredSrc: uwsLivingBrass,
     description:
-      "A condominium renovation carried out against a fixed move-in date. The kitchen was opened to the living room, every bathroom was rebuilt, and storage was added throughout without giving up floor area.",
+      "A compact condominium rebuilt to feel considerably larger than its footprint. Custom metal wall panels, concealed cove lighting, and a full-height shelving wall carry the living area, with the kitchen opened to it and the bathroom rebuilt in warm wood and stone.",
     scope: [
-      "Kitchen wall removal and structural coordination",
-      "New kitchen with waterfall island and integrated appliances",
-      "Primary bathroom and powder room rebuilt",
-      "Custom closets and living room built-ins",
-      "New lighting layout, dimming, and controls",
+      "Custom metal wall panels and integrated cove lighting",
+      "Full-height shelving and storage wall",
+      "Kitchen opened to the living area",
+      "Bathroom rebuilt with wood vanity and recessed medicine cabinet",
+      "New electrical, lighting, and controls",
       "Building alteration approval and inspections",
     ],
     gallery: [
-      "Living and dining area after completion",
-      "Open kitchen with waterfall island",
-      "Cabinetry and appliance integration",
-      "Backsplash and undercabinet lighting",
-      "Primary bathroom with double vanity",
-      "Walk-in shower with glass enclosure",
-      "Powder room stone detail",
-      "Custom closet build-out",
-      "Bedroom with new lighting layout",
-      "Living room built-in shelving",
+      ["Living area and open kitchen after completion", uwsLivingKitchen],
+      ["Bathroom with wood vanity and recessed medicine cabinet", uwsBathVanity],
     ],
   },
   {
     id: "soho",
     name: "SoHo",
-    type: "Millwork-led renovation",
-    meta: "Cast-iron loft · Kitchen, baths, and millwork",
+    type: "Loft renovation",
+    meta: "Cast-iron loft · Kitchen and interior build-out",
     featured: "Featured: great room with original cast-iron columns",
+    featuredSrc: sohoLoftColumns,
     description:
-      "A millwork-led renovation of a cast-iron loft. Full-height paneling, concealed doors, and a library wall were built to align with the existing column grid, with the kitchen and bathrooms rebuilt to match.",
+      "A cast-iron loft renovated around what was already there. The original columns and pressed-tin ceiling were preserved and worked into the new plan, while the walls came down to bare framing so the mechanical systems could be rebuilt before the kitchen and finishes went in.",
     scope: [
-      "Full-height wall paneling and concealed doors",
-      "Library shelving and integrated storage",
-      "Kitchen with paneled appliance integration",
-      "Primary bathroom with book-matched stone",
-      "Soundproofed bedroom partition and insulation",
-      "Trade coordination with the design team throughout",
+      "Selective demolition back to bare framing",
+      "New electrical and plumbing distribution",
+      "Preservation of original columns and pressed-tin ceiling",
+      "Kitchen with full-height paneled wall and dark island",
+      "Restored floors, trim, and painted finishes",
+      "Landmark-area building coordination and DOB filings",
     ],
     gallery: [
-      "Great room with original cast-iron columns",
-      "Full-height millwork wall",
-      "Library shelving detail",
-      "Kitchen with integrated paneling",
-      "Island and stone detail",
-      "Primary bath with book-matched stone",
-      "Vanity and fixture detail",
-      "Concealed door and trim alignment",
-      "Bedroom with soundproofed partition",
-      "Entry and coat closet build-out",
+      ["Demolition and rough framing during construction", sohoDemoFraming],
+      ["Completed kitchen with paneled wall and dark island", sohoKitchenComplete],
     ],
   },
 ];
@@ -403,9 +407,8 @@ function Home() {
       <section className="hero">
         <ImagePlaceholder
           className="hero-backdrop"
-          note="Signature completed Manhattan apartment interior"
-          size="2400 × 1600 px"
-          src={heroImage}
+          note="Completed kitchen with stone island and Manhattan views"
+          src={uesKitchenStoneIsland}
         />
         <div className="hero-shade" />
         <div className="container hero-content reveal">
@@ -449,8 +452,8 @@ function Home() {
           <div className="home-services">
             <Link to="/kitchens">
               <ImagePlaceholder
-                note="Featured completed kitchen"
-                size="1600 × 1200 px"
+                note="Completed kitchen with walnut cabinetry and waterfall island"
+                src={kitchenWalnutWaterfall}
               />
               <div>
                 <p className="eyebrow">Kitchens</p>
@@ -460,8 +463,8 @@ function Home() {
             </Link>
             <Link to="/bathrooms">
               <ImagePlaceholder
-                note="Featured completed bathroom"
-                size="1600 × 1200 px"
+                note="Completed powder room with marble floor and custom vanity"
+                src={bathPowderWallpaper}
               />
               <div>
                 <p className="eyebrow">Bathrooms</p>
@@ -486,8 +489,8 @@ function Home() {
           </div>
           <ImagePlaceholder
             className="reveal"
-            note="Project manager reviewing plans on site"
-            size="1500 × 1200 px"
+            note="Completed great room with marble floor, ready for handover"
+            src={uesMarbleGreatRoom}
           />
         </div>
       </section>
@@ -588,7 +591,7 @@ function ServicePage({ type }) {
           <ImagePlaceholder
             className="reveal"
             note={data.heroNote}
-            size="1800 × 1500 px"
+            src={data.heroSrc}
           />
         </div>
       </section>
@@ -610,10 +613,7 @@ function ServicePage({ type }) {
       </section>
       <section className="feature">
         <div className="container feature-grid">
-          <ImagePlaceholder
-            note={`${type === "kitchens" ? "Kitchen" : "Bathroom"} construction detail in progress`}
-            size="1600 × 1200 px"
-          />
+          <ImagePlaceholder note={data.featureNote} src={data.featureSrc} />
           <div className="feature-copy">
             <p className="eyebrow">Manhattan coordination</p>
             <h2>The building is part of the project.</h2>
@@ -655,12 +655,12 @@ function ProjectPanel({ project, onClose }) {
         </div>
       </div>
       <div className="project-gallery">
-        {project.gallery.map((note, i) => (
+        {project.gallery.map(([note, src], i) => (
           <ImagePlaceholder
             key={note}
             className={i === 0 ? "gallery-lead" : ""}
             note={note}
-            size={i === 0 ? "2000 × 1400 px" : undefined}
+            src={src}
           />
         ))}
       </div>
@@ -720,7 +720,10 @@ function Portfolio() {
                     aria-expanded={isOpen}
                     aria-controls={`project-${project.id}`}
                   >
-                    <ImagePlaceholder note={project.featured} />
+                    <ImagePlaceholder
+                      note={project.featured}
+                      src={project.featuredSrc}
+                    />
                     <span className="portfolio-meta">
                       <span className="portfolio-type">{project.type}</span>
                       <span className="portfolio-name">{project.name}</span>
@@ -793,8 +796,8 @@ function About() {
           </div>
           <ImagePlaceholder
             className="reveal"
-            note="GB Renovations team or founder portrait on a project site"
-            size="1800 × 1500 px"
+            note="Loft kitchen with an illuminated island and open dining"
+            src={kitchenLoftBar}
           />
         </div>
       </section>
