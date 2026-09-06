@@ -1290,6 +1290,58 @@ footer {
   color: var(--blue);
 }
 
+/* Footer navigation and the social icon row sit together on the right side. */
+.footer-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 26px;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social-links a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.social-links a:hover {
+  border-color: var(--blue);
+  background: var(--soft);
+  color: var(--blue);
+}
+
+.contact-follow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.contact-follow p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 900px) {
   .home-services,
   .page-hero-grid,
@@ -1316,9 +1368,51 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  /* Mobile footer: one centered stack -- social row, then links, then the
+     copyright line, each separated by a hairline instead of wide gaps. */
+  footer {
+    padding: 18px 0 22px;
+  }
+
   .footer-bottom {
-    align-items: flex-start;
     flex-direction: column-reverse;
+    align-items: stretch;
+    text-align: center;
+    gap: 0;
+  }
+
+  .footer-bottom > span {
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 0.7rem;
+  }
+
+  .footer-end {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 6px 18px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer-links a {
+    font-size: 0.78rem;
+  }
+
+  .social-links {
+    justify-content: center;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .social-links a {
+    width: 30px;
+    height: 30px;
   }
 
   .cta-band > .container {

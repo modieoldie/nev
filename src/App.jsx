@@ -30,6 +30,8 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  FacebookLogo,
+  InstagramLogo,
   List,
   Minus,
   Plus,
@@ -38,6 +40,19 @@ import {
 
 const LICENSE_LINE =
   "Licensed & Insured NYC General Contractor · Licensed Plumbing & Electrical Trades";
+
+const SOCIAL_LINKS = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/gbrenovationnyc/",
+    Icon: InstagramLogo,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/GBrenovationNYC",
+    Icon: FacebookLogo,
+  },
+];
 
 const serviceData = {
   kitchens: {
@@ -349,18 +364,44 @@ function Header() {
   );
 }
 
+function SocialLinks() {
+  return (
+    <ul className="social-links">
+      {SOCIAL_LINKS.map((social) => {
+        const { label, href, Icon } = social;
+        return (
+          <li key={label}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`GB Renovations on ${label}`}
+              title={label}
+            >
+              <Icon size={20} weight="fill" />
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 function Footer() {
   return (
     <footer>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} GB Renovations NYC.</span>
-        <nav className="footer-links" aria-label="Footer">
-          <Link to="/portfolio">Portfolio</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/process">Process</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-        </nav>
+        <div className="footer-end">
+          <nav className="footer-links" aria-label="Footer">
+            <Link to="/portfolio">Portfolio</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/process">Process</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+          </nav>
+          <SocialLinks />
+        </div>
       </div>
     </footer>
   );
@@ -907,6 +948,10 @@ function Contact() {
             <span>Manhattan apartment renovations</span>
             <span>Architect and designer collaboration</span>
             <span>Verified phone and email to be added</span>
+          </div>
+          <div className="contact-follow">
+            <p>See recent projects</p>
+            <SocialLinks />
           </div>
         </div>
         <ContactForm />
