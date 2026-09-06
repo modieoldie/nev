@@ -409,8 +409,13 @@ function Footer() {
 
 function PageShell({ children }) {
   const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+  useLayoutEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     document.title = `${pathname === "/" ? "Manhattan Apartment Renovations" : pathname.slice(1).replace("-", " ")} | GB Renovations`;
   }, [pathname]);
   useEffect(() => {
@@ -716,14 +721,12 @@ function Portfolio() {
   const [openId, setOpenId] = useState(null);
   const panelRef = useRef(null);
   const gridRef = useRef(null);
-  const mounted = useRef(false);
+  const lastOpenId = useRef(openId);
   const open = portfolio.find((p) => p.id === openId) || null;
 
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
+    if (lastOpenId.current === openId) return;
+    lastOpenId.current = openId;
     const target = openId ? panelRef.current : gridRef.current;
     if (!target) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;

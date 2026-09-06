@@ -619,10 +619,6 @@ footer {
   .hero-visual {
     min-height: 380px;
   }
-  .hero-actions,
-  .hero-actions .button {
-    width: 100%;
-  }
   .services,
   .steps,
   .field-grid {
@@ -752,7 +748,10 @@ footer {
   position: relative;
   z-index: 1;
   padding-top: 190px;
-  padding-bottom: 90px;
+  /* the hero is bottom-aligned, so this padding is the only gap between the
+     copy block and the bottom edge - keep it tight so the eyebrow, headline,
+     lead, and actions all sit low in the frame */
+  padding-bottom: 48px;
 }
 .hero h1 {
   max-width: 940px;
@@ -1002,17 +1001,28 @@ section {
   .nav-inner {
     height: 76px;
   }
-  .hero-content {
-    padding-top: 160px;
-    padding-bottom: 70px;
-  }
   .hero-shade {
-    background:
-      linear-gradient(90deg, rgba(2, 13, 36, 0.85), rgba(2, 13, 36, 0.25)),
-      linear-gradient(0deg, rgba(2, 13, 36, 0.45), transparent 40%);
+    background: linear-gradient(
+      0deg,
+      rgba(2, 13, 36, 0) 0%,
+      rgba(2, 13, 36, 0.1) 30%,
+      rgba(2, 13, 36, 0.72) 58%,
+      rgba(2, 13, 36, 0.92) 100%
+    );
   }
   section {
     padding: 95px 0;
+  }
+  /* Stack the intro so the lead paragraph sits under the h2 rather than
+     beside it. Re-stated here because the later top-level .intro rule
+     re-applies two columns after the earlier breakpoint block. */
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .intro .lead {
+    max-width: none;
   }
   .projects {
     grid-template-columns: 1fr;
@@ -1043,9 +1053,6 @@ section {
 @media (max-width: 600px) {
   .hero h1 {
     font-size: clamp(3.2rem, 16vw, 5rem);
-  }
-  .hero-content {
-    padding-bottom: 48px;
   }
   .hero-backdrop strong {
     font-size: 0.85rem;
@@ -1226,23 +1233,30 @@ section {
 }
 
 .cta-band {
-  padding: 80px 0;
+  padding: 56px 0;
   background: var(--blue);
   color: #fff;
 }
 
 .cta-band > .container {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 40px;
 }
 
+/* The band's padding is symmetric, but the line boxes are not: the eyebrow's
+   1.6 line-height parks empty leading above its capitals, while the headline's
+   tight 0.98 line-height lets descenders ("your apartment?") spill below its
+   box. Both are trimmed back to the font's own content edges so the visible
+   text sits the same distance from each band edge. */
 .cta-band .eyebrow {
+  margin-top: -0.15em;
   color: #d6e0ff;
 }
 
 .cta-band h2 {
+  margin-bottom: 0.16em;
   font-size: clamp(2.4rem, 5vw, 4.8rem);
 }
 
@@ -1418,6 +1432,11 @@ footer {
   .cta-band > .container {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  /* On phones the eyebrow and button carry the CTA on their own. */
+  .cta-band h2 {
+    display: none;
   }
 
   .cta-band .button {
@@ -1920,8 +1939,13 @@ footer {
     inset: var(--nav-h) 0 0;
   }
 
+  .hero {
+    min-height: 86dvh;
+  }
+
   .hero-content {
-    padding-top: 170px;
+    padding-top: 150px;
+    padding-bottom: 56px;
   }
 
   .page-hero,
@@ -1930,13 +1954,8 @@ footer {
     padding-top: 148px;
   }
 
-  .trust-inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .trust-list {
-    grid-template-columns: 1fr 1fr;
+  .trust {
+    display: none;
   }
 
   .numbered-list {
@@ -1973,27 +1992,32 @@ footer {
     height: 46px;
   }
 
-  .trust {
-    padding: 26px 0;
+  .hero {
+    min-height: 76dvh;
   }
 
-  .trust-title {
-    max-width: none;
-    font-size: 1.02rem;
+  .hero-content {
+    padding-top: 96px;
+    padding-bottom: 40px;
   }
 
-  .trust-list {
-    grid-template-columns: 1fr;
-    gap: 0;
+  /* Keep both calls to action on one line: the row never wraps and the two
+     buttons split the available width evenly. */
+  .hero-actions {
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 10px;
   }
 
-  .trust-list li {
-    padding: 13px 0;
-    font-size: 0.88rem;
-  }
-
-  .trust-list li:last-child {
-    padding-bottom: 0;
+  .hero-actions .button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 46px;
+    padding-inline: 10px;
+    /* the labels never wrap, so the type scales down with the viewport to keep
+       both buttons on the line at 320px */
+    font-size: clamp(0.5rem, 2.4vw, 0.62rem);
+    letter-spacing: 0.04em;
   }
 
   .numbered-row {
@@ -2091,5 +2115,98 @@ footer {
 @media (max-width: 600px) {
   :root {
     --edge: 18px;
+  }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Mobile density pass: the desktop rhythm (95px sections, 90px block gaps)
+   turns into a lot of dead scrolling on a phone, so vertical spacing is cut
+   roughly in half here. Horizontal padding and type sizes are untouched.
+   --------------------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  section {
+    padding: 56px 0;
+  }
+
+  .hero-content {
+    padding-top: 88px;
+    padding-bottom: 32px;
+  }
+
+  .page-hero,
+  .simple-hero,
+  .contact-page {
+    padding-top: 112px;
+  }
+
+  .simple-hero {
+    padding-bottom: 44px;
+  }
+
+  .simple-hero .lead,
+  .contact-page .lead,
+  .feature-copy .lead {
+    margin-top: 20px;
+  }
+
+  .simple-hero .button {
+    margin-top: 24px;
+  }
+
+  .services {
+    margin-top: 40px;
+  }
+
+  .service {
+    padding: 24px 0;
+  }
+
+  .home-services {
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .detail-grid,
+  .projects,
+  .project-gallery,
+  .about-placeholder,
+  .contact-facts {
+    margin-top: 30px;
+  }
+
+  .steps {
+    margin-top: 40px;
+  }
+
+  .feature-copy {
+    padding: 44px 20px;
+  }
+
+  .feature-points {
+    margin-top: 28px;
+  }
+
+  .process-shell {
+    padding: 32px 20px;
+  }
+
+  .project-panel {
+    margin-top: 32px;
+    padding-top: 28px;
+  }
+
+  .project-close.bottom {
+    margin-top: 28px;
+    padding: 14px;
+  }
+
+  .cta-band {
+    padding: 34px 0;
+  }
+
+  .cta-band > .container {
+    gap: 18px;
   }
 }
